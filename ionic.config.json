@@ -1,0 +1,8 @@
+{
+  "name": "MOCK - Usina do Corpo",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular",
+  "id": "6b0be1f3"
+}
