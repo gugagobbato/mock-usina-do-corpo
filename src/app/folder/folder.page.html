@@ -1,21 +1,71 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-buttons slot="start">
-      <ion-menu-button></ion-menu-button>
-    </ion-buttons>
-    <ion-title>{{ folder }}</ion-title>
-  </ion-toolbar>
-</ion-header>
+<ion-content>
+  <div class="swiper-container">
+    <div class="swiper-wrapper">
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">{{ folder }}</ion-title>
-    </ion-toolbar>
-  </ion-header>
+      <div>
+        <!-- Slide 1 - PERSONAL ONLINE -->
+        <ion-toolbar class="swiper-toolbar">
+          <ion-title>PERSONAL ONLINE</ion-title>
+          <ion-buttons slot="end">
+            <ion-button (click)="addNewTraining()" shape="round" style="font-size: 24px;">
+              <ion-icon name="add-circle-outline" style="color: darkorange;"></ion-icon>
+            </ion-button>
+          </ion-buttons>
+        </ion-toolbar>
 
-  <div id="container">
-    <strong class="capitalize">{{ folder }}</strong>
-    <p>Explore <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
+        <swiper-container [modules]="swiperModules" #swiper1>
+          <swiper-slide *ngFor="let slide of slides; let i = index">
+            <!-- Adiciona botão e label apenas no primeiro slide -->
+            <div *ngIf="i === 0" class="new-training-div">
+              <ion-img [src]="slide.image" class="swiper-image opacity-03"></ion-img>
+              <ion-button (click)="addNewTraining()" fill="clear" shape="round" class="new-training-button">
+                <ion-icon name="add-circle-outline" style="color: white;"></ion-icon>
+                <ion-label style="color: white;">
+                NOVO TREINO
+                </ion-label>
+              </ion-button>
+            </div>
+            <ion-img *ngIf="i !== 0" [src]="slide.image" class="swiper-image"></ion-img>
+          </swiper-slide>
+        </swiper-container>
+      </div>
+
+      <!-- Slide 2 - PROGRAMAS -->
+      <div>
+        <ion-toolbar class="swiper-toolbar">
+          <ion-title>PROGRAMAS
+            <ion-fab vertical="top" horizontal="end" class="fab-new" *ngIf="newPrograms">
+              <ion-fab-button style="width: 50px; height: 20px;" (click)="markAsRead()">
+                <ion-text color="dark">NOVO</ion-text>
+              </ion-fab-button>
+            </ion-fab>
+          </ion-title>
+        </ion-toolbar>
+
+        <swiper-container [modules]="swiperModules" #swiper2>
+          <swiper-slide *ngFor="let slide of slides">
+            <ion-img [src]="slide.image" class="swiper-image"></ion-img>
+            <div class="swiper-slide-legend">
+              <div class="slide-description">{{ slide.description }}</div>
+              <div class="slide-title">{{ slide.title }}</div>
+            </div>
+          </swiper-slide>
+        </swiper-container>
+      </div>
+
+      <!-- Slide 3 - CONTEÚDOS -->
+      <div #contentDiv>
+        <ion-toolbar class="swiper-toolbar">
+          <ion-title>CONTEÚDOS</ion-title>
+        </ion-toolbar>
+
+        <swiper-container [modules]="swiperModules" #swiper3>
+          <swiper-slide *ngFor="let slide of slides">
+            <ion-img [src]="slide.image" class="swiper-image"></ion-img>
+          </swiper-slide>
+        </swiper-container>
+      </div>
+
+    </div>
   </div>
 </ion-content>

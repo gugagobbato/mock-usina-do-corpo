@@ -1,0 +1,75 @@
+<ion-menu contentId="main-content" type="overlay">
+  <ion-content>
+    <ion-list id="inbox-list">
+      <ion-img src="../../../../assets/img/png/logo_usina.png" style="padding: 20px;"></ion-img>
+
+      <ion-menu-toggle auto-hide="false" *ngFor="let p of appPages; let i = index">
+        <ion-item routerDirection="root" [routerLink]="[p.url]" lines="none" detail="false" routerLinkActive="selected">
+          <ion-icon aria-hidden="true" slot="start" [ios]="p.icon + '-outline'" [md]="p.icon + '-sharp'"
+            style="color: darkorange;"></ion-icon>
+          <ion-label>{{ p.title }}</ion-label>
+        </ion-item>
+      </ion-menu-toggle>
+    </ion-list>
+
+  </ion-content>
+</ion-menu>
+
+<ion-toolbar class="header">
+  <ion-grid class="header-grid">
+    <ion-row>
+      <ion-col size="2">
+        <ion-menu-button style="color: white;"></ion-menu-button>
+      </ion-col>
+
+      <ion-col size="8" class="logo-col">
+        <ion-img src="../../../../assets/img/png/logo_usina.png" class="logo"></ion-img>
+      </ion-col>
+
+      <ion-col size="2" class="notification-col">
+        <ion-button fill="clear" shape="round" (click)="toggleNotifications()">
+          <ion-icon name="notifications" style="color: darkorange;"></ion-icon>
+          <ion-fab vertical="top" horizontal="end" class="fab-notification" *ngIf="newNotifications">
+            <ion-fab-button style="width: 15px; height: 15px;" color="secondary"></ion-fab-button>
+          </ion-fab>
+        </ion-button>
+      </ion-col>
+
+    </ion-row>
+  </ion-grid>
+
+  <ion-grid class="user-grid">
+    <ion-row class="user-row">
+      <ion-col size="2"></ion-col>
+      <ion-col size="10">
+        <div class="user-info">
+          <ion-img src="{{user.avatar}}" class="round-avatar"></ion-img>
+          <div class="user-details">
+            <div class="user-name">{{user.name}}</div>
+            <div class="user-level" [ngStyle]="{color: levelColor()}">Nível {{user.level}}</div>
+          </div>
+        </div>
+      </ion-col>
+      <ion-col size="2"></ion-col>
+    </ion-row>
+
+    <ion-row class="action-buttons-row">
+      <ion-col size="12">
+        <div class="buttons-container">
+          <ion-button fill="clear">
+            <ion-icon name="body" slot="start" class="button-icon"></ion-icon>
+            <ion-label class="button-label">
+              MEU CORPO
+            </ion-label>
+          </ion-button>
+          <ion-button fill="clear">
+            <ion-icon name="trophy" slot="start" class="button-icon"></ion-icon>
+            <ion-label class="button-label">
+              OBJETIVOS E CONQUISTAS
+            </ion-label>
+          </ion-button>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-toolbar>
